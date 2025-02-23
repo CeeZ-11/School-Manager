@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { TextField, Button, List, ListItem, ListItemText } from "@mui/material";
+import {
+  TextField,
+  Button,
+  List,
+  ListItem,
+  ListItemText,
+  IconButton,
+} from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const Students = () => {
   const [students, setStudents] = useState([]);
@@ -10,6 +18,11 @@ const Students = () => {
       setStudents([...students, name]);
       setName("");
     }
+  };
+
+  const handleRemoveStudent = (index) => {
+    const newStudents = students.filter((_, i) => i !== index);
+    setStudents(newStudents);
   };
 
   return (
@@ -29,6 +42,13 @@ const Students = () => {
         {students.map((student, index) => (
           <ListItem key={index}>
             <ListItemText primary={student} />
+            <IconButton
+              edge="end"
+              aria-label="delete"
+              onClick={() => handleRemoveStudent(index)}
+            >
+              <DeleteIcon />
+            </IconButton>
           </ListItem>
         ))}
       </List>
