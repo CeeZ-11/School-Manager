@@ -7,13 +7,21 @@ import {
   ListItemText,
   IconButton,
   Typography,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 
 const Students = () => {
   const [students, setStudents] = useState([]);
   const [name, setName] = useState("");
   const [error, setError] = useState("");
+  const [editIndex, setEditIndex] = useState(null);
+  const [editName, setEditName] = useState("");
 
   const handleAddStudent = () => {
     if (name.trim()) {
@@ -28,6 +36,20 @@ const Students = () => {
   const handleRemoveStudent = (index) => {
     const newStudents = students.filter((_, i) => i !== index);
     setStudents(newStudents);
+  };
+
+  const handleEditStudent = (index) => {
+    setEditIndex(index);
+    setEditName(students[index]);
+  };
+
+  const handleSaveEdit = () => {
+    const newStudents = students.map((student, index) =>
+      index === editIndex ? editName : student
+    );
+    setStudents(newStudents);
+    setEditIndex(null);
+    setEditName("");
   };
 
   return (
@@ -56,6 +78,13 @@ const Students = () => {
               <ListItemText primary={student} />
               <IconButton
                 edge="end"
+                aria-label="edit"
+                onClick={() => handleEditStudent(index)}
+              >
+                <EditIcon />
+              </IconButton>
+              <IconButton
+                edge="end"
                 aria-label="delete"
                 onClick={() => handleRemoveStudent(index)}
               >
@@ -65,6 +94,29 @@ const Students = () => {
           ))}
         </List>
       )}
+      <Dialog open={editIndex !== null} onClose={() => setEditIndex(null)}>
+        <DialogTitle>Edit Student</DialogTitle>
+        <DialogContent>
+          <DialogContentText>Edit the name of the student.</DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            label="Student Name"
+            type="text"
+            fullWidth
+            value={editName}
+            onChange={(e) => setEditName(e.target.value)}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setEditIndex(null)} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleSaveEdit} color="primary">
+            Save
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };
