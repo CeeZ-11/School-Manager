@@ -23,17 +23,19 @@ import {
   Group as GroupIcon,
   PersonAddAlt as PersonAddAltIcon,
   People as PeopleIcon,
+  LibraryAdd as LibraryAddIcon,
+  ListAlt as ListAltIcon,
 } from "@mui/icons-material";
 
 import Navbar from "./Navbar";
 import Schedule from "../pages/Schedule";
 import Home from "../pages/Home";
-import Students from "../pages/Students";
-import Staff from "../pages/Staff";
 import AddStudent from "../pages/AddStudent";
 import ManageStudents from "../pages/ManageStudents";
 import AddStaff from "../pages/AddStaff";
 import ManageStaff from "../pages/ManageStaff";
+import AddCourse from "../pages/AddCourse";
+import ManageCourses from "../pages/ManageCourses";
 
 const drawerWidth = 240;
 
@@ -41,6 +43,7 @@ function Dashboard() {
   const [open, setOpen] = useState(false);
   const [studentsOpen, setStudentsOpen] = useState(false);
   const [staffOpen, setStaffOpen] = useState(false);
+  const [coursesOpen, setCoursesOpen] = useState(false);
 
   const toggleDrawer = () => setOpen(!open);
   const toggleStudents = () => {
@@ -50,6 +53,10 @@ function Dashboard() {
   const toggleStaff = () => {
     setOpen(true);
     setStaffOpen(!staffOpen);
+  };
+  const toggleCourses = () => {
+    setOpen(true);
+    setCoursesOpen(!coursesOpen);
   };
 
   return (
@@ -87,6 +94,42 @@ function Dashboard() {
             </ListItemButton>
           </ListItem>
 
+          {/* Courses Section */}
+          <ListItem disablePadding>
+            <ListItemButton
+              onClick={toggleCourses}
+              sx={{ display: "flex", justifyContent: "space-between" }}
+            >
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <ListItemIcon>
+                  <LibraryAddIcon />
+                </ListItemIcon>
+                {open && <ListItemText primary="Course" />}
+              </Box>
+              {open && (coursesOpen ? <ExpandLess /> : <ExpandMore />)}
+            </ListItemButton>
+          </ListItem>
+          <Collapse in={coursesOpen} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              <ListItemButton sx={{ pl: 4 }} component={Link} to="/courses/add">
+                <ListItemIcon>
+                  <LibraryAddIcon />
+                </ListItemIcon>
+                <ListItemText primary="Add Course" />
+              </ListItemButton>
+              <ListItemButton
+                sx={{ pl: 4 }}
+                component={Link}
+                to="/courses/manage"
+              >
+                <ListItemIcon>
+                  <ListAltIcon />
+                </ListItemIcon>
+                <ListItemText primary="Manage Course" />
+              </ListItemButton>
+            </List>
+          </Collapse>
+
           {/* Students Section */}
           <ListItem disablePadding>
             <ListItemButton
@@ -97,7 +140,7 @@ function Dashboard() {
                 <ListItemIcon>
                   <SchoolIcon />
                 </ListItemIcon>
-                {open && <ListItemText primary="Students" />}
+                {open && <ListItemText primary="Student" />}
               </Box>
               {open && (studentsOpen ? <ExpandLess /> : <ExpandMore />)}
             </ListItemButton>
@@ -122,7 +165,7 @@ function Dashboard() {
                 <ListItemIcon>
                   <GroupIcon />
                 </ListItemIcon>
-                <ListItemText primary="Manage Students" />
+                <ListItemText primary="Manage Student" />
               </ListItemButton>
             </List>
           </Collapse>
@@ -169,10 +212,10 @@ function Dashboard() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/schedule" element={<Schedule />} />
-          <Route path="/students" element={<Students />} />
+          <Route path="/students/add" element={<AddCourse />} />
+          <Route path="/students/manage" element={<ManageCourses />} />
           <Route path="/students/add" element={<AddStudent />} />
           <Route path="/students/manage" element={<ManageStudents />} />
-          <Route path="/staff" element={<Staff />} />
           <Route path="/staff/add" element={<AddStaff />} />
           <Route path="/staff/manage" element={<ManageStaff />} />
         </Routes>
