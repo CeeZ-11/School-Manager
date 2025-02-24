@@ -2,17 +2,13 @@ import { AppBar, Toolbar, IconButton, Typography, Box } from "@mui/material";
 import { Menu as MenuIcon } from "@mui/icons-material";
 import ProfileMenu from "./Profile.jsx";
 
+const userRole = "Admin";
+
 const Navbar = ({ toggleDrawer }) => {
   return (
     <AppBar position="fixed" sx={{ zIndex: 1201 }}>
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+        <Box sx={{ display: "flex", alignItems: "center" }}>
           <IconButton
             edge="start"
             color="inherit"
@@ -25,8 +21,10 @@ const Navbar = ({ toggleDrawer }) => {
             School Management System
           </Typography>
         </Box>
-        <Box>
+
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
           <ProfileMenu />
+          <Typography variant="body1">{userRole}</Typography>
         </Box>
       </Toolbar>
     </AppBar>
