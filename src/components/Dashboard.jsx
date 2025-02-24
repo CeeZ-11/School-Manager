@@ -14,8 +14,6 @@ import {
 } from "@mui/material";
 import {
   Dashboard as DashboardIcon,
-  School as SchoolIcon,
-  Person as PersonIcon,
   CalendarMonth as CalendarIcon,
   ExpandLess,
   ExpandMore,
@@ -25,8 +23,9 @@ import {
   People as PeopleIcon,
   Bookmark as BookmarkIcon,
   ListAlt as ListAltIcon,
+  School as SchoolIcon,
+  Person as PersonIcon,
 } from "@mui/icons-material";
-
 import Navbar from "./Navbar";
 import Schedule from "../pages/Schedule";
 import Home from "../pages/Home";
@@ -39,31 +38,46 @@ import ManageCourses from "../pages/ManageCourses";
 
 const drawerWidth = 240;
 
+const SidebarItem = ({ icon, text, link, onClick }) => (
+  <ListItem disablePadding>
+    <ListItemButton component={Link} to={link} onClick={onClick}>
+      <ListItemIcon>{icon}</ListItemIcon>
+      <ListItemText primary={text} />
+    </ListItemButton>
+  </ListItem>
+);
+
+const SidebarDropdown = ({ icon, text, open, toggleOpen, items }) => (
+  <>
+    <ListItem disablePadding>
+      <ListItemButton onClick={toggleOpen}>
+        <ListItemIcon>{icon}</ListItemIcon>
+        <ListItemText primary={text} />
+        {open ? <ExpandLess /> : <ExpandMore />}
+      </ListItemButton>
+    </ListItem>
+    <Collapse in={open} timeout="auto" unmountOnExit>
+      <List component="div" disablePadding>
+        {items.map((item, index) => (
+          <SidebarItem key={index} {...item} />
+        ))}
+      </List>
+    </Collapse>
+  </>
+);
+
 function Dashboard() {
   const [open, setOpen] = useState(false);
   const [studentsOpen, setStudentsOpen] = useState(false);
   const [staffOpen, setStaffOpen] = useState(false);
   const [coursesOpen, setCoursesOpen] = useState(false);
 
-  const toggleDrawer = () => setOpen(!open);
-  const toggleStudents = () => {
-    setOpen(true);
-    setStudentsOpen(!studentsOpen);
-  };
-  const toggleStaff = () => {
-    setOpen(true);
-    setStaffOpen(!staffOpen);
-  };
-  const toggleCourses = () => {
-    setOpen(true);
-    setCoursesOpen(!coursesOpen);
-  };
+  const expandSidebar = () => setOpen(true);
 
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <Navbar toggleDrawer={toggleDrawer} />
-
+      <Navbar toggleDrawer={() => setOpen(!open)} />
       <Drawer
         variant="permanent"
         sx={{
@@ -77,119 +91,75 @@ function Dashboard() {
       >
         <Toolbar />
         <List>
-          <ListItem disablePadding>
-            <ListItemButton component={Link} to="/">
-              <ListItemIcon>
-                <DashboardIcon />
-              </ListItemIcon>
-              {open && <ListItemText primary="Dashboard" />}
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component={Link} to="/schedule">
-              <ListItemIcon>
-                <CalendarIcon />
-              </ListItemIcon>
-              {open && <ListItemText primary="Schedule" />}
-            </ListItemButton>
-          </ListItem>
+          <SidebarItem icon={<DashboardIcon />} text="Dashboard" link="/" />
+          <SidebarItem
+            icon={<CalendarIcon />}
+            text="Schedule"
+            link="/schedule"
+          />
 
-          {/* Courses Section */}
-          <ListItem disablePadding>
-            <ListItemButton onClick={toggleCourses}>
-              <ListItemIcon>
-                <BookmarkIcon />
-              </ListItemIcon>
-              {open && <ListItemText primary="Courses" />}
-              {open && (coursesOpen ? <ExpandLess /> : <ExpandMore />)}
-            </ListItemButton>
-          </ListItem>
-          <Collapse in={coursesOpen} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              <ListItemButton sx={{ pl: 4 }} component={Link} to="/courses/add">
-                <ListItemIcon>
-                  <BookmarkIcon />
-                </ListItemIcon>
-                <ListItemText primary="Add Course" />
-              </ListItemButton>
-              <ListItemButton
-                sx={{ pl: 4 }}
-                component={Link}
-                to="/courses/manage"
-              >
-                <ListItemIcon>
-                  <ListAltIcon />
-                </ListItemIcon>
-                <ListItemText primary="Manage Courses" />
-              </ListItemButton>
-            </List>
-          </Collapse>
+          <SidebarDropdown
+            icon={<BookmarkIcon />}
+            text="Courses"
+            open={coursesOpen}
+            toggleOpen={() => setCoursesOpen(!coursesOpen)}
+            items={[
+              {
+                icon: <BookmarkIcon />,
+                text: "Add Course",
+                link: "/courses/add",
+                onClick: expandSidebar,
+              },
+              {
+                icon: <ListAltIcon />,
+                text: "Manage Courses",
+                link: "/courses/manage",
+                onClick: expandSidebar,
+              },
+            ]}
+          />
 
-          {/* Students Section */}
-          <ListItem disablePadding>
-            <ListItemButton onClick={toggleStudents}>
-              <ListItemIcon>
-                <SchoolIcon />
-              </ListItemIcon>
-              {open && <ListItemText primary="Students" />}
-              {open && (studentsOpen ? <ExpandLess /> : <ExpandMore />)}
-            </ListItemButton>
-          </ListItem>
-          <Collapse in={studentsOpen} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              <ListItemButton
-                sx={{ pl: 4 }}
-                component={Link}
-                to="/students/add"
-              >
-                <ListItemIcon>
-                  <PersonAddIcon />
-                </ListItemIcon>
-                <ListItemText primary="Add Student" />
-              </ListItemButton>
-              <ListItemButton
-                sx={{ pl: 4 }}
-                component={Link}
-                to="/students/manage"
-              >
-                <ListItemIcon>
-                  <GroupIcon />
-                </ListItemIcon>
-                <ListItemText primary="Manage Students" />
-              </ListItemButton>
-            </List>
-          </Collapse>
+          <SidebarDropdown
+            icon={<SchoolIcon />}
+            text="Students"
+            open={studentsOpen}
+            toggleOpen={() => setStudentsOpen(!studentsOpen)}
+            items={[
+              {
+                icon: <PersonAddIcon />,
+                text: "Add Student",
+                link: "/students/add",
+                onClick: expandSidebar,
+              },
+              {
+                icon: <GroupIcon />,
+                text: "Manage Students",
+                link: "/students/manage",
+                onClick: expandSidebar,
+              },
+            ]}
+          />
 
-          {/* Staff Section */}
-          <ListItem disablePadding>
-            <ListItemButton onClick={toggleStaff}>
-              <ListItemIcon>
-                <PersonIcon />
-              </ListItemIcon>
-              {open && <ListItemText primary="Staff" />}
-              {open && (staffOpen ? <ExpandLess /> : <ExpandMore />)}
-            </ListItemButton>
-          </ListItem>
-          <Collapse in={staffOpen} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              <ListItemButton sx={{ pl: 4 }} component={Link} to="/staff/add">
-                <ListItemIcon>
-                  <PersonAddAltIcon />
-                </ListItemIcon>
-                <ListItemText primary="Add Staff" />
-              </ListItemButton>
-              <ListItemButton
-                sx={{ pl: 4 }}
-                component={Link}
-                to="/staff/manage"
-              >
-                <ListItemIcon>
-                  <PeopleIcon />
-                </ListItemIcon>
-                <ListItemText primary="Manage Staff" />
-              </ListItemButton>
-            </List>
-          </Collapse>
+          <SidebarDropdown
+            icon={<PersonIcon />}
+            text="Staff"
+            open={staffOpen}
+            toggleOpen={() => setStaffOpen(!staffOpen)}
+            items={[
+              {
+                icon: <PersonAddAltIcon />,
+                text: "Add Staff",
+                link: "/staff/add",
+                onClick: expandSidebar,
+              },
+              {
+                icon: <PeopleIcon />,
+                text: "Manage Staff",
+                link: "/staff/manage",
+                onClick: expandSidebar,
+              },
+            ]}
+          />
         </List>
       </Drawer>
 
