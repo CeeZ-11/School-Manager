@@ -22,6 +22,7 @@ const Students = () => {
   const [error, setError] = useState("");
   const [editIndex, setEditIndex] = useState(null);
   const [editName, setEditName] = useState("");
+  const [deleteIndex, setDeleteIndex] = useState(null);
 
   const handleAddStudent = () => {
     if (name.trim()) {
@@ -36,6 +37,7 @@ const Students = () => {
   const handleRemoveStudent = (index) => {
     const newStudents = students.filter((_, i) => i !== index);
     setStudents(newStudents);
+    setDeleteIndex(null);
   };
 
   const handleEditStudent = (index) => {
@@ -86,7 +88,7 @@ const Students = () => {
               <IconButton
                 edge="end"
                 aria-label="delete"
-                onClick={() => handleRemoveStudent(index)}
+                onClick={() => setDeleteIndex(index)}
               >
                 <DeleteIcon />
               </IconButton>
@@ -114,6 +116,25 @@ const Students = () => {
           </Button>
           <Button onClick={handleSaveEdit} color="primary">
             Save
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog open={deleteIndex !== null} onClose={() => setDeleteIndex(null)}>
+        <DialogTitle>Delete Student</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to delete this student?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setDeleteIndex(null)} color="primary">
+            Cancel
+          </Button>
+          <Button
+            onClick={() => handleRemoveStudent(deleteIndex)}
+            color="primary"
+          >
+            Delete
           </Button>
         </DialogActions>
       </Dialog>
