@@ -18,7 +18,7 @@ import {
   CalendarMonth as CalendarIcon,
 } from "@mui/icons-material";
 
-import Navbar from "./Navbar"; // ✅ Import Navbar
+import Navbar from "./Navbar";
 import Schedule from "../pages/Schedule";
 import Home from "../pages/Home";
 import Students from "../pages/Students";
@@ -34,10 +34,8 @@ function Dashboard() {
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
 
-      {/* Navbar at the top */}
       <Navbar toggleDrawer={toggleDrawer} />
 
-      {/* Sidebar Drawer */}
       <Drawer
         variant="permanent"
         sx={{
@@ -86,7 +84,6 @@ function Dashboard() {
         </List>
       </Drawer>
 
-      {/* Main Content Area */}
       <Box component="main" sx={{ flexGrow: 1, p: 3, mt: 8 }}>
         <Routes>
           <Route path="/" element={<Home />} />
