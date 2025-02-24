@@ -212,8 +212,8 @@ function Dashboard() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/schedule" element={<Schedule />} />
-          <Route path="/students/add" element={<AddCourse />} />
-          <Route path="/students/manage" element={<ManageCourses />} />
+          <Route path="/courses/add" element={<AddCourse />} />
+          <Route path="/courses/manage" element={<ManageCourses />} />
           <Route path="/students/add" element={<AddStudent />} />
           <Route path="/students/manage" element={<ManageStudents />} />
           <Route path="/staff/add" element={<AddStaff />} />
