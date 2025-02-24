@@ -1,11 +1,14 @@
 import { HashRouter } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
+import { UserRoleProvider } from "./context/UserRoleContext";
 
 const App = () => {
   return (
-    <HashRouter>
-      <Dashboard />
-    </HashRouter>
+    <UserRoleProvider>
+      <HashRouter>
+        <Dashboard />
+      </HashRouter>
+    </UserRoleProvider>
   );
 };
 

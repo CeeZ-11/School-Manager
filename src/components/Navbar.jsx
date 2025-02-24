@@ -1,10 +1,11 @@
 import { AppBar, Toolbar, IconButton, Typography, Box } from "@mui/material";
 import { Menu as MenuIcon } from "@mui/icons-material";
 import ProfileMenu from "./Profile.jsx";
-
-const userRole = "Admin";
+import useUserRole from "../hooks/useUserRole";
 
 const Navbar = ({ toggleDrawer }) => {
+  const { userRole } = useUserRole();
+
   return (
     <AppBar position="fixed" sx={{ zIndex: 1201 }}>
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
