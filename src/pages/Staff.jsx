@@ -16,17 +16,17 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 
-const Teachers = () => {
-  const [teachers, setTeachers] = useState([]);
+const Staff = () => {
+  const [staff, setStaff] = useState([]);
   const [name, setName] = useState("");
   const [error, setError] = useState("");
   const [editIndex, setEditIndex] = useState(null);
   const [editName, setEditName] = useState("");
   const [deleteIndex, setDeleteIndex] = useState(null);
 
-  const handleAddTeacher = () => {
+  const handleAddStaff = () => {
     if (name.trim()) {
-      setTeachers([...teachers, name]);
+      setStaff([...staff, name]);
       setName("");
       setError("");
     } else {
@@ -34,31 +34,31 @@ const Teachers = () => {
     }
   };
 
-  const handleRemoveTeacher = (index) => {
-    const newTeachers = teachers.filter((_, i) => i !== index);
-    setTeachers(newTeachers);
+  const handleRemoveStaff = (index) => {
+    const newStaff = staff.filter((_, i) => i !== index);
+    setStaff(newStaff);
     setDeleteIndex(null);
   };
 
-  const handleEditTeacher = (index) => {
+  const handleEditStaff = (index) => {
     setEditIndex(index);
-    setEditName(teachers[index]);
+    setEditName(staff[index]);
   };
 
   const handleSaveEdit = () => {
-    const newTeachers = teachers.map((teacher, index) =>
-      index === editIndex ? editName : teacher
+    const newStaff = staff.map((st, index) =>
+      index === editIndex ? editName : st
     );
-    setTeachers(newTeachers);
+    setStaff(newStaff);
     setEditIndex(null);
     setEditName("");
   };
 
   return (
     <div>
-      <h1>Teachers Page</h1>
+      <h1>Staff Page</h1>
       <TextField
-        label="Teacher Name"
+        label="Staff Name"
         value={name}
         onChange={(e) => setName(e.target.value)}
         variant="outlined"
@@ -66,22 +66,22 @@ const Teachers = () => {
         error={!!error}
         helperText={error}
       />
-      <Button variant="contained" color="primary" onClick={handleAddTeacher}>
-        Add Teacher
+      <Button variant="contained" color="primary" onClick={handleAddStaff}>
+        Add Staff
       </Button>
-      {teachers.length === 0 ? (
+      {staff.length === 0 ? (
         <Typography variant="body1" color="textSecondary">
-          No teachers added yet.
+          No staff added yet.
         </Typography>
       ) : (
         <List>
-          {teachers.map((teacher, index) => (
+          {staff.map((st, index) => (
             <ListItem key={index}>
-              <ListItemText primary={teacher} />
+              <ListItemText primary={st} />
               <IconButton
                 edge="end"
                 aria-label="edit"
-                onClick={() => handleEditTeacher(index)}
+                onClick={() => handleEditStaff(index)}
               >
                 <EditIcon />
               </IconButton>
@@ -97,13 +97,13 @@ const Teachers = () => {
         </List>
       )}
       <Dialog open={editIndex !== null} onClose={() => setEditIndex(null)}>
-        <DialogTitle>Edit Teacher</DialogTitle>
+        <DialogTitle>Edit Staff</DialogTitle>
         <DialogContent>
-          <DialogContentText>Edit the name of the teacher.</DialogContentText>
+          <DialogContentText>Edit the name of the staff.</DialogContentText>
           <TextField
             autoFocus
             margin="dense"
-            label="Teacher Name"
+            label="Staff Name"
             type="text"
             fullWidth
             value={editName}
@@ -120,10 +120,10 @@ const Teachers = () => {
         </DialogActions>
       </Dialog>
       <Dialog open={deleteIndex !== null} onClose={() => setDeleteIndex(null)}>
-        <DialogTitle>Delete Teacher</DialogTitle>
+        <DialogTitle>Delete Staff</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Are you sure you want to delete this teacher?
+            Are you sure you want to delete this staff?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -131,7 +131,7 @@ const Teachers = () => {
             Cancel
           </Button>
           <Button
-            onClick={() => handleRemoveTeacher(deleteIndex)}
+            onClick={() => handleRemoveStaff(deleteIndex)}
             color="primary"
           >
             Delete
@@ -142,4 +142,4 @@ const Teachers = () => {
   );
 };
 
-export default Teachers;
+export default Staff;

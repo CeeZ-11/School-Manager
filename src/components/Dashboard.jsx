@@ -22,7 +22,7 @@ import Navbar from "./Navbar";
 import Schedule from "../pages/Schedule";
 import Home from "../pages/Home";
 import Students from "../pages/Students";
-import Teachers from "../pages/Teachers";
+import Staff from "../pages/Staff";
 
 const drawerWidth = 240;
 
@@ -74,11 +74,11 @@ function Dashboard() {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton component={Link} to="/teachers">
+            <ListItemButton component={Link} to="/staff">
               <ListItemIcon>
                 <PersonIcon />
               </ListItemIcon>
-              {open && <ListItemText primary="Teachers" />}
+              {open && <ListItemText primary="Staff" />}
             </ListItemButton>
           </ListItem>
         </List>
@@ -89,7 +89,7 @@ function Dashboard() {
           <Route path="/" element={<Home />} />
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/students" element={<Students />} />
-          <Route path="/teachers" element={<Teachers />} />
+          <Route path="/staff" element={<Staff />} />
         </Routes>
       </Box>
     </Box>
