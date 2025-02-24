@@ -1,25 +1,21 @@
-import { AppBar, Toolbar, Typography, Button } from "@mui/material";
-import { Link } from "react-router-dom";
+import { AppBar, Toolbar, IconButton, Typography } from "@mui/material";
+import { Menu as MenuIcon } from "@mui/icons-material";
 
-const Navbar = () => {
+const Navbar = ({ toggleDrawer }) => {
   return (
-    <AppBar position="static">
+    <AppBar position="fixed" sx={{ zIndex: 1201 }}>
       <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          School Manager
+        <IconButton
+          edge="start"
+          color="inherit"
+          onClick={toggleDrawer}
+          sx={{ mr: 2 }}
+        >
+          <MenuIcon />
+        </IconButton>
+        <Typography variant="h6" noWrap>
+          School Management System
         </Typography>
-        <Button color="inherit" component={Link} to="/">
-          Home
-        </Button>
-        <Button color="inherit" component={Link} to="/students">
-          Students
-        </Button>
-        <Button color="inherit" component={Link} to="/teachers">
-          Teachers
-        </Button>
-        <Button color="inherit" component={Link} to="/schedule">
-          Schedule
-        </Button>
       </Toolbar>
     </AppBar>
   );

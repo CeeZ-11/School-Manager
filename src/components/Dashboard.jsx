@@ -1,27 +1,24 @@
 import { useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import {
-  AppBar,
-  Toolbar,
-  IconButton,
   Drawer,
   List,
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Typography,
   CssBaseline,
   Box,
+  Toolbar,
 } from "@mui/material";
 import {
-  Menu as MenuIcon,
   Dashboard as DashboardIcon,
   School as SchoolIcon,
   Person as PersonIcon,
   CalendarMonth as CalendarIcon,
 } from "@mui/icons-material";
 
+import Navbar from "./Navbar"; // ✅ Import Navbar
 import Schedule from "../pages/Schedule";
 import Home from "../pages/Home";
 import Students from "../pages/Students";
@@ -37,22 +34,8 @@ function Dashboard() {
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
 
-      {/* AppBar */}
-      <AppBar position="fixed" sx={{ zIndex: 1201 }}>
-        <Toolbar>
-          <IconButton
-            edge="start"
-            color="inherit"
-            onClick={toggleDrawer}
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            School Management System
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      {/* Navbar at the top */}
+      <Navbar toggleDrawer={toggleDrawer} />
 
       {/* Sidebar Drawer */}
       <Drawer
