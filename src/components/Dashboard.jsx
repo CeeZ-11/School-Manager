@@ -25,6 +25,7 @@ import {
   ListAlt as ListAltIcon,
   School as SchoolIcon,
   Person as PersonIcon,
+  Business as BusinessIcon,
 } from "@mui/icons-material";
 import Navbar from "./Navbar";
 import Schedule from "../pages/Schedule";
@@ -35,6 +36,8 @@ import AddStaff from "../pages/AddStaff";
 import ManageStaff from "../pages/ManageStaff";
 import AddCourse from "../pages/AddCourse";
 import ManageCourses from "../pages/ManageCourses";
+import AddDepartment from "../pages/AddDepartment";
+import ManageDepartments from "../pages/ManageDepartments";
 
 const drawerWidth = 240;
 
@@ -71,8 +74,7 @@ function Dashboard() {
   const [studentsOpen, setStudentsOpen] = useState(false);
   const [staffOpen, setStaffOpen] = useState(false);
   const [coursesOpen, setCoursesOpen] = useState(false);
-
-  const expandSidebar = () => setOpen(true);
+  const [departmentsOpen, setDepartmentsOpen] = useState(false);
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -99,43 +101,20 @@ function Dashboard() {
           />
 
           <SidebarDropdown
-            icon={<BookmarkIcon />}
-            text="Courses"
-            open={coursesOpen}
-            toggleOpen={() => setCoursesOpen(!coursesOpen)}
+            icon={<BusinessIcon />}
+            text="Departments"
+            open={departmentsOpen}
+            toggleOpen={() => setDepartmentsOpen(!departmentsOpen)}
             items={[
               {
-                icon: <BookmarkIcon />,
-                text: "Add Course",
-                link: "/courses/add",
-                onClick: expandSidebar,
+                icon: <BusinessIcon />,
+                text: "Add Department",
+                link: "/departments/add",
               },
               {
                 icon: <ListAltIcon />,
-                text: "Manage Courses",
-                link: "/courses/manage",
-                onClick: expandSidebar,
-              },
-            ]}
-          />
-
-          <SidebarDropdown
-            icon={<SchoolIcon />}
-            text="Students"
-            open={studentsOpen}
-            toggleOpen={() => setStudentsOpen(!studentsOpen)}
-            items={[
-              {
-                icon: <PersonAddIcon />,
-                text: "Add Student",
-                link: "/students/add",
-                onClick: expandSidebar,
-              },
-              {
-                icon: <GroupIcon />,
-                text: "Manage Students",
-                link: "/students/manage",
-                onClick: expandSidebar,
+                text: "Manage Departments",
+                link: "/departments/manage",
               },
             ]}
           />
@@ -150,13 +129,49 @@ function Dashboard() {
                 icon: <PersonAddAltIcon />,
                 text: "Add Staff",
                 link: "/staff/add",
-                onClick: expandSidebar,
               },
               {
                 icon: <PeopleIcon />,
                 text: "Manage Staff",
                 link: "/staff/manage",
-                onClick: expandSidebar,
+              },
+            ]}
+          />
+
+          <SidebarDropdown
+            icon={<BookmarkIcon />}
+            text="Courses"
+            open={coursesOpen}
+            toggleOpen={() => setCoursesOpen(!coursesOpen)}
+            items={[
+              {
+                icon: <BookmarkIcon />,
+                text: "Add Course",
+                link: "/courses/add",
+              },
+              {
+                icon: <ListAltIcon />,
+                text: "Manage Courses",
+                link: "/courses/manage",
+              },
+            ]}
+          />
+
+          <SidebarDropdown
+            icon={<SchoolIcon />}
+            text="Students"
+            open={studentsOpen}
+            toggleOpen={() => setStudentsOpen(!studentsOpen)}
+            items={[
+              {
+                icon: <PersonAddIcon />,
+                text: "Add Student",
+                link: "/students/add",
+              },
+              {
+                icon: <GroupIcon />,
+                text: "Manage Students",
+                link: "/students/manage",
               },
             ]}
           />
@@ -167,12 +182,14 @@ function Dashboard() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/schedule" element={<Schedule />} />
+          <Route path="/departments/add" element={<AddDepartment />} />
+          <Route path="/departments/manage" element={<ManageDepartments />} />
+          <Route path="/staff/add" element={<AddStaff />} />
+          <Route path="/staff/manage" element={<ManageStaff />} />
           <Route path="/courses/add" element={<AddCourse />} />
           <Route path="/courses/manage" element={<ManageCourses />} />
           <Route path="/students/add" element={<AddStudent />} />
           <Route path="/students/manage" element={<ManageStudents />} />
-          <Route path="/staff/add" element={<AddStaff />} />
-          <Route path="/staff/manage" element={<ManageStaff />} />
         </Routes>
       </Box>
     </Box>
