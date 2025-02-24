@@ -23,7 +23,7 @@ import {
   Group as GroupIcon,
   PersonAddAlt as PersonAddAltIcon,
   People as PeopleIcon,
-  LibraryAdd as LibraryAddIcon,
+  Bookmark as BookmarkIcon,
   ListAlt as ListAltIcon,
 } from "@mui/icons-material";
 
@@ -96,16 +96,11 @@ function Dashboard() {
 
           {/* Courses Section */}
           <ListItem disablePadding>
-            <ListItemButton
-              onClick={toggleCourses}
-              sx={{ display: "flex", justifyContent: "space-between" }}
-            >
-              <Box sx={{ display: "flex", alignItems: "center" }}>
-                <ListItemIcon>
-                  <LibraryAddIcon />
-                </ListItemIcon>
-                {open && <ListItemText primary="Course" />}
-              </Box>
+            <ListItemButton onClick={toggleCourses}>
+              <ListItemIcon>
+                <BookmarkIcon />
+              </ListItemIcon>
+              {open && <ListItemText primary="Courses" />}
               {open && (coursesOpen ? <ExpandLess /> : <ExpandMore />)}
             </ListItemButton>
           </ListItem>
@@ -113,7 +108,7 @@ function Dashboard() {
             <List component="div" disablePadding>
               <ListItemButton sx={{ pl: 4 }} component={Link} to="/courses/add">
                 <ListItemIcon>
-                  <LibraryAddIcon />
+                  <BookmarkIcon />
                 </ListItemIcon>
                 <ListItemText primary="Add Course" />
               </ListItemButton>
@@ -125,23 +120,18 @@ function Dashboard() {
                 <ListItemIcon>
                   <ListAltIcon />
                 </ListItemIcon>
-                <ListItemText primary="Manage Course" />
+                <ListItemText primary="Manage Courses" />
               </ListItemButton>
             </List>
           </Collapse>
 
           {/* Students Section */}
           <ListItem disablePadding>
-            <ListItemButton
-              onClick={toggleStudents}
-              sx={{ display: "flex", justifyContent: "space-between" }}
-            >
-              <Box sx={{ display: "flex", alignItems: "center" }}>
-                <ListItemIcon>
-                  <SchoolIcon />
-                </ListItemIcon>
-                {open && <ListItemText primary="Student" />}
-              </Box>
+            <ListItemButton onClick={toggleStudents}>
+              <ListItemIcon>
+                <SchoolIcon />
+              </ListItemIcon>
+              {open && <ListItemText primary="Students" />}
               {open && (studentsOpen ? <ExpandLess /> : <ExpandMore />)}
             </ListItemButton>
           </ListItem>
@@ -165,23 +155,18 @@ function Dashboard() {
                 <ListItemIcon>
                   <GroupIcon />
                 </ListItemIcon>
-                <ListItemText primary="Manage Student" />
+                <ListItemText primary="Manage Students" />
               </ListItemButton>
             </List>
           </Collapse>
 
           {/* Staff Section */}
           <ListItem disablePadding>
-            <ListItemButton
-              onClick={toggleStaff}
-              sx={{ display: "flex", justifyContent: "space-between" }}
-            >
-              <Box sx={{ display: "flex", alignItems: "center" }}>
-                <ListItemIcon>
-                  <PersonIcon />
-                </ListItemIcon>
-                {open && <ListItemText primary="Staff" />}
-              </Box>
+            <ListItemButton onClick={toggleStaff}>
+              <ListItemIcon>
+                <PersonIcon />
+              </ListItemIcon>
+              {open && <ListItemText primary="Staff" />}
               {open && (staffOpen ? <ExpandLess /> : <ExpandMore />)}
             </ListItemButton>
           </ListItem>
