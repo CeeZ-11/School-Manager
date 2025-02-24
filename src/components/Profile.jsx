@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Menu, MenuItem, IconButton, Avatar } from "@mui/material";
+import profilePic from "../assets/profile.webp";
 
 function ProfileMenu() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -11,7 +12,11 @@ function ProfileMenu() {
   return (
     <>
       <IconButton onClick={handleClick}>
-        <Avatar alt="User" src="/profile.jpg" />
+        <Avatar
+          alt="User"
+          src={profilePic}
+          sx={{ width: 30, height: 30, fontSize: 15 }}
+        />
       </IconButton>
       <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
         <MenuItem onClick={handleClose}>Profile</MenuItem>
