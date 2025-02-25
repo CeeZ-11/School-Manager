@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 import {
   Drawer,
   List,
@@ -43,32 +43,6 @@ import {
   NotificationsActive as NotificationsActiveIcon,
 } from "@mui/icons-material";
 import Navbar from "./Navbar";
-import Schedule from "../pages/Schedule";
-import Home from "../pages/Home";
-import AddStudent from "../pages/AddStudent";
-import ManageStudents from "../pages/ManageStudents";
-import AddStaff from "../pages/AddStaff";
-import ManageStaff from "../pages/ManageStaff";
-import AddCourse from "../pages/AddCourse";
-import ManageCourses from "../pages/ManageCourses";
-import AddDepartment from "../pages/AddDepartment";
-import ManageDepartments from "../pages/ManageDepartments";
-import AddSubject from "../pages/AddSubject";
-import ManageSubjects from "../pages/ManageSubjects";
-import AddRoom from "../pages/AddRoom";
-import ManageRooms from "../pages/ManageRooms";
-import AddClass from "../pages/AddClass";
-import ManageClasses from "../pages/ManageClasses";
-import AddSchedule from "../pages/AddSchedule";
-import ManageSchedules from "../pages/ManageSchedules";
-import AddAttendance from "../pages/AddAttendance";
-import ManageAttendances from "../pages/ManageAttendances";
-import AddGrade from "../pages/AddGrade";
-import ManageGrades from "../pages/ManageGrades";
-import AddExam from "../pages/AddExam";
-import ManageExams from "../pages/ManageExams";
-import AddAnnouncement from "../pages/AddAnnouncement";
-import ManageAnnouncements from "../pages/ManageAnnouncements";
 
 const drawerWidth = 240;
 
@@ -132,11 +106,15 @@ function Dashboard() {
       >
         <Toolbar />
         <List>
-          <SidebarItem icon={<DashboardIcon />} text="Dashboard" link="/" />
+          <SidebarItem
+            icon={<DashboardIcon />}
+            text="Dashboard"
+            link="/dashboard"
+          />
           <SidebarItem
             icon={<CalendarIcon />}
             text="Schedule"
-            link="/schedule"
+            link="/dashboard/schedule"
           />
 
           <SidebarDropdown
@@ -148,12 +126,12 @@ function Dashboard() {
               {
                 icon: <BusinessIcon />,
                 text: "Add Department",
-                link: "/departments/add",
+                link: "/dashboard/departments/add",
               },
               {
                 icon: <ListAltIcon />,
                 text: "Manage Departments",
-                link: "/departments/manage",
+                link: "/dashboard/departments/manage",
               },
             ]}
           />
@@ -167,12 +145,12 @@ function Dashboard() {
               {
                 icon: <PersonAddAltIcon />,
                 text: "Add Staff",
-                link: "/staff/add",
+                link: "/dashboard/staff/add",
               },
               {
                 icon: <PeopleIcon />,
                 text: "Manage Staff",
-                link: "/staff/manage",
+                link: "/dashboard/staff/manage",
               },
             ]}
           />
@@ -186,12 +164,12 @@ function Dashboard() {
               {
                 icon: <BookmarkIcon />,
                 text: "Add Course",
-                link: "/courses/add",
+                link: "/dashboard/courses/add",
               },
               {
                 icon: <ListAltIcon />,
                 text: "Manage Courses",
-                link: "/courses/manage",
+                link: "/dashboard/courses/manage",
               },
             ]}
           />
@@ -205,12 +183,12 @@ function Dashboard() {
               {
                 icon: <LibraryBooksIcon />,
                 text: "Add Subject",
-                link: "/subjects/add",
+                link: "/dashboard/subjects/add",
               },
               {
                 icon: <MenuBookIcon />,
                 text: "Manage Subjects",
-                link: "/subjects/manage",
+                link: "/dashboard/subjects/manage",
               },
             ]}
           />
@@ -224,12 +202,12 @@ function Dashboard() {
               {
                 icon: <MeetingRoomIcon />,
                 text: "Add Room",
-                link: "/rooms/add",
+                link: "/dashboard/rooms/add",
               },
               {
                 icon: <ApartmentIcon />,
                 text: "Manage Rooms",
-                link: "/rooms/manage",
+                link: "/dashboard/rooms/manage",
               },
             ]}
           />
@@ -243,12 +221,12 @@ function Dashboard() {
               {
                 icon: <ClassIcon />,
                 text: "Add Class",
-                link: "/classes/add",
+                link: "/dashboard/classes/add",
               },
               {
                 icon: <MenuBookIcon />,
                 text: "Manage Classes",
-                link: "/classes/manage",
+                link: "/dashboard/classes/manage",
               },
             ]}
           />
@@ -262,12 +240,12 @@ function Dashboard() {
               {
                 icon: <EventIcon />,
                 text: "Add Schedule",
-                link: "/schedules/add",
+                link: "/dashboard/schedules/add",
               },
               {
                 icon: <CalendarTodayIcon />,
                 text: "Manage Schedules",
-                link: "/schedules/manage",
+                link: "/dashboard/schedules/manage",
               },
             ]}
           />
@@ -281,12 +259,12 @@ function Dashboard() {
               {
                 icon: <PersonAddIcon />,
                 text: "Add Student",
-                link: "/students/add",
+                link: "/dashboard/students/add",
               },
               {
                 icon: <GroupIcon />,
                 text: "Manage Students",
-                link: "/students/manage",
+                link: "/dashboard/students/manage",
               },
             ]}
           />
@@ -300,12 +278,12 @@ function Dashboard() {
               {
                 icon: <HowToRegIcon />,
                 text: "Add Attendance",
-                link: "/attendances/add",
+                link: "/dashboard/attendances/add",
               },
               {
                 icon: <FactCheckIcon />,
                 text: "Manage Attendances",
-                link: "/attendances/manage",
+                link: "/dashboard/attendances/manage",
               },
             ]}
           />
@@ -319,12 +297,12 @@ function Dashboard() {
               {
                 icon: <GradeIcon />,
                 text: "Add Grades",
-                link: "/grades/add",
+                link: "/dashboard/grades/add",
               },
               {
                 icon: <AssignmentTurnedInIcon />,
                 text: "Manage Grades",
-                link: "/grades/manage",
+                link: "/dashboard/grades/manage",
               },
             ]}
           />
@@ -338,12 +316,12 @@ function Dashboard() {
               {
                 icon: <NoteAddIcon />,
                 text: "Add Exams",
-                link: "/exams/add",
+                link: "/dashboard/exams/add",
               },
               {
                 icon: <AssignmentIcon />,
                 text: "Manage Exams",
-                link: "/exams/manage",
+                link: "/dashboard/exams/manage",
               },
             ]}
           />
@@ -357,12 +335,12 @@ function Dashboard() {
               {
                 icon: <CampaignIcon />,
                 text: "Add Announcements",
-                link: "/announcements/add",
+                link: "/dashboard/announcements/add",
               },
               {
                 icon: <NotificationsActiveIcon />,
                 text: "Manage Announcements",
-                link: "/announcements/manage",
+                link: "/dashboard/announcements/manage",
               },
             ]}
           />
@@ -370,37 +348,7 @@ function Dashboard() {
       </Drawer>
 
       <Box component="main" sx={{ flexGrow: 1, p: 3, mt: 8 }}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/schedule" element={<Schedule />} />
-          <Route path="/departments/add" element={<AddDepartment />} />
-          <Route path="/departments/manage" element={<ManageDepartments />} />
-          <Route path="/staff/add" element={<AddStaff />} />
-          <Route path="/staff/manage" element={<ManageStaff />} />
-          <Route path="/courses/add" element={<AddCourse />} />
-          <Route path="/courses/manage" element={<ManageCourses />} />
-          <Route path="/subjects/add" element={<AddSubject />} />
-          <Route path="/subjects/manage" element={<ManageSubjects />} />
-          <Route path="/rooms/add" element={<AddRoom />} />
-          <Route path="/rooms/manage" element={<ManageRooms />} />
-          <Route path="/classes/add" element={<AddClass />} />
-          <Route path="/classes/manage" element={<ManageClasses />} />
-          <Route path="/schedules/add" element={<AddSchedule />} />
-          <Route path="/schedules/manage" element={<ManageSchedules />} />
-          <Route path="/students/add" element={<AddStudent />} />
-          <Route path="/students/manage" element={<ManageStudents />} />
-          <Route path="/attendances/add" element={<AddAttendance />} />
-          <Route path="/attendances/manage" element={<ManageAttendances />} />
-          <Route path="/grades/add" element={<AddGrade />} />
-          <Route path="/grades/manage" element={<ManageGrades />} />
-          <Route path="/exams/add" element={<AddExam />} />
-          <Route path="/exams/manage" element={<ManageExams />} />
-          <Route path="/announcements/add" element={<AddAnnouncement />} />
-          <Route
-            path="/announcements/manage"
-            element={<ManageAnnouncements />}
-          />
-        </Routes>
+        <Outlet />
       </Box>
     </Box>
   );
