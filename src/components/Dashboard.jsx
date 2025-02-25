@@ -37,6 +37,8 @@ import {
   FactCheck as FactCheckIcon,
   Grade as GradeIcon,
   AssignmentTurnedIn as AssignmentTurnedInIcon,
+  NoteAdd as NoteAddIcon,
+  Assignment as AssignmentIcon,
 } from "@mui/icons-material";
 import Navbar from "./Navbar";
 import Schedule from "../pages/Schedule";
@@ -61,6 +63,8 @@ import AddAttendance from "../pages/AddAttendance";
 import ManageAttendances from "../pages/ManageAttendances";
 import AddGrade from "../pages/AddGrade";
 import ManageGrades from "../pages/ManageGrades";
+import AddExam from "../pages/AddExam";
+import ManageExams from "../pages/ManageExams";
 
 const drawerWidth = 240;
 
@@ -104,6 +108,7 @@ function Dashboard() {
   const [schedulesOpen, setSchedulesOpen] = useState(false);
   const [attendancesOpen, setAttendancesOpen] = useState(false);
   const [gradesOpen, setGradesOpen] = useState(false);
+  const [examsOpen, setExamsOpen] = useState(false);
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -318,6 +323,25 @@ function Dashboard() {
               },
             ]}
           />
+
+          <SidebarDropdown
+            icon={<NoteAddIcon />}
+            text="Exams"
+            open={examsOpen}
+            toggleOpen={() => setExamsOpen(!examsOpen)}
+            items={[
+              {
+                icon: <NoteAddIcon />,
+                text: "Add Exams",
+                link: "/exams/add",
+              },
+              {
+                icon: <AssignmentIcon />,
+                text: "Manage Exams",
+                link: "/exams/manage",
+              },
+            ]}
+          />
         </List>
       </Drawer>
 
@@ -345,6 +369,8 @@ function Dashboard() {
           <Route path="/attendances/manage" element={<ManageAttendances />} />
           <Route path="/grades/add" element={<AddGrade />} />
           <Route path="/grades/manage" element={<ManageGrades />} />
+          <Route path="/exams/add" element={<AddExam />} />
+          <Route path="/exams/manage" element={<ManageExams />} />
         </Routes>
       </Box>
     </Box>
