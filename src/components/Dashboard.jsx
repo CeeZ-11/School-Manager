@@ -39,6 +39,8 @@ import {
   AssignmentTurnedIn as AssignmentTurnedInIcon,
   NoteAdd as NoteAddIcon,
   Assignment as AssignmentIcon,
+  Campaign as CampaignIcon,
+  NotificationsActive as NotificationsActiveIcon,
 } from "@mui/icons-material";
 import Navbar from "./Navbar";
 import Schedule from "../pages/Schedule";
@@ -65,6 +67,8 @@ import AddGrade from "../pages/AddGrade";
 import ManageGrades from "../pages/ManageGrades";
 import AddExam from "../pages/AddExam";
 import ManageExams from "../pages/ManageExams";
+import AddAnnouncement from "../pages/AddAnnouncement";
+import ManageAnnouncements from "../pages/ManageAnnouncements";
 
 const drawerWidth = 240;
 
@@ -109,6 +113,7 @@ function Dashboard() {
   const [attendancesOpen, setAttendancesOpen] = useState(false);
   const [gradesOpen, setGradesOpen] = useState(false);
   const [examsOpen, setExamsOpen] = useState(false);
+  const [announcementsOpen, setAnnouncementsOpen] = useState(false);
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -342,6 +347,25 @@ function Dashboard() {
               },
             ]}
           />
+
+          <SidebarDropdown
+            icon={<CampaignIcon />}
+            text="Announcements"
+            open={announcementsOpen}
+            toggleOpen={() => setAnnouncementsOpen(!announcementsOpen)}
+            items={[
+              {
+                icon: <CampaignIcon />,
+                text: "Add Announcements",
+                link: "/announcements/add",
+              },
+              {
+                icon: <NotificationsActiveIcon />,
+                text: "Manage Announcements",
+                link: "/announcements/manage",
+              },
+            ]}
+          />
         </List>
       </Drawer>
 
@@ -371,6 +395,11 @@ function Dashboard() {
           <Route path="/grades/manage" element={<ManageGrades />} />
           <Route path="/exams/add" element={<AddExam />} />
           <Route path="/exams/manage" element={<ManageExams />} />
+          <Route path="/announcements/add" element={<AddAnnouncement />} />
+          <Route
+            path="/announcements/manage"
+            element={<ManageAnnouncements />}
+          />
         </Routes>
       </Box>
     </Box>
