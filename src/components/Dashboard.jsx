@@ -28,6 +28,8 @@ import {
   Business as BusinessIcon,
   LibraryBooks as LibraryBooksIcon,
   MenuBook as MenuBookIcon,
+  MeetingRoom as MeetingRoomIcon,
+  Apartment as ApartmentIcon,
 } from "@mui/icons-material";
 import Navbar from "./Navbar";
 import Schedule from "../pages/Schedule";
@@ -42,6 +44,8 @@ import AddDepartment from "../pages/AddDepartment";
 import ManageDepartments from "../pages/ManageDepartments";
 import AddSubject from "../pages/AddSubject";
 import ManageSubjects from "../pages/ManageSubjects";
+import AddRoom from "../pages/AddRoom";
+import ManageRooms from "../pages/ManageRooms";
 
 const drawerWidth = 240;
 
@@ -80,6 +84,7 @@ function Dashboard() {
   const [coursesOpen, setCoursesOpen] = useState(false);
   const [departmentsOpen, setDepartmentsOpen] = useState(false);
   const [subjectsOpen, setSubjectsOpen] = useState(false);
+  const [roomsOpen, setRoomsOpen] = useState(false);
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -182,6 +187,25 @@ function Dashboard() {
           />
 
           <SidebarDropdown
+            icon={<MeetingRoomIcon />}
+            text="Rooms"
+            open={roomsOpen}
+            toggleOpen={() => setRoomsOpen(!roomsOpen)}
+            items={[
+              {
+                icon: <MeetingRoomIcon />,
+                text: "Add Room",
+                link: "/rooms/add",
+              },
+              {
+                icon: <ApartmentIcon />,
+                text: "Manage Rooms",
+                link: "/rooms/manage",
+              },
+            ]}
+          />
+
+          <SidebarDropdown
             icon={<SchoolIcon />}
             text="Students"
             open={studentsOpen}
@@ -214,6 +238,8 @@ function Dashboard() {
           <Route path="/courses/manage" element={<ManageCourses />} />
           <Route path="/subjects/add" element={<AddSubject />} />
           <Route path="/subjects/manage" element={<ManageSubjects />} />
+          <Route path="/rooms/add" element={<AddRoom />} />
+          <Route path="/rooms/manage" element={<ManageRooms />} />
           <Route path="/students/add" element={<AddStudent />} />
           <Route path="/students/manage" element={<ManageStudents />} />
         </Routes>
