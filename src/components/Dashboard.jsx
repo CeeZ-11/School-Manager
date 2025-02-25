@@ -31,6 +31,8 @@ import {
   MeetingRoom as MeetingRoomIcon,
   Apartment as ApartmentIcon,
   Class as ClassIcon,
+  Event as EventIcon,
+  CalendarToday as CalendarTodayIcon,
 } from "@mui/icons-material";
 import Navbar from "./Navbar";
 import Schedule from "../pages/Schedule";
@@ -49,6 +51,8 @@ import AddRoom from "../pages/AddRoom";
 import ManageRooms from "../pages/ManageRooms";
 import AddClass from "../pages/AddClass";
 import ManageClasses from "../pages/ManageClasses";
+import AddSchedule from "../pages/AddSchedule";
+import ManageSchedules from "../pages/ManageSchedules";
 
 const drawerWidth = 240;
 
@@ -89,6 +93,7 @@ function Dashboard() {
   const [subjectsOpen, setSubjectsOpen] = useState(false);
   const [roomsOpen, setRoomsOpen] = useState(false);
   const [classesOpen, setClassesOpen] = useState(false);
+  const [schedulesOpen, setSchedulesOpen] = useState(false);
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -229,6 +234,25 @@ function Dashboard() {
           />
 
           <SidebarDropdown
+            icon={<EventIcon />}
+            text="Schedules"
+            open={schedulesOpen}
+            toggleOpen={() => setSchedulesOpen(!schedulesOpen)}
+            items={[
+              {
+                icon: <EventIcon />,
+                text: "Add Schedule",
+                link: "/schedules/add",
+              },
+              {
+                icon: <CalendarTodayIcon />,
+                text: "Manage Schedules",
+                link: "/schedules/manage",
+              },
+            ]}
+          />
+
+          <SidebarDropdown
             icon={<SchoolIcon />}
             text="Students"
             open={studentsOpen}
@@ -265,6 +289,8 @@ function Dashboard() {
           <Route path="/rooms/manage" element={<ManageRooms />} />
           <Route path="/classes/add" element={<AddClass />} />
           <Route path="/classes/manage" element={<ManageClasses />} />
+          <Route path="/schedules/add" element={<AddSchedule />} />
+          <Route path="/schedules/manage" element={<ManageSchedules />} />
           <Route path="/students/add" element={<AddStudent />} />
           <Route path="/students/manage" element={<ManageStudents />} />
         </Routes>
