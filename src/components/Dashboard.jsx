@@ -33,6 +33,8 @@ import {
   Class as ClassIcon,
   Event as EventIcon,
   CalendarToday as CalendarTodayIcon,
+  HowToReg as HowToRegIcon,
+  FactCheck as FactCheckIcon,
 } from "@mui/icons-material";
 import Navbar from "./Navbar";
 import Schedule from "../pages/Schedule";
@@ -53,6 +55,8 @@ import AddClass from "../pages/AddClass";
 import ManageClasses from "../pages/ManageClasses";
 import AddSchedule from "../pages/AddSchedule";
 import ManageSchedules from "../pages/ManageSchedules";
+import AddAttendance from "../pages/AddAttendance";
+import ManageAttendances from "../pages/ManageAttendances";
 
 const drawerWidth = 240;
 
@@ -94,6 +98,7 @@ function Dashboard() {
   const [roomsOpen, setRoomsOpen] = useState(false);
   const [classesOpen, setClassesOpen] = useState(false);
   const [schedulesOpen, setSchedulesOpen] = useState(false);
+  const [attendancesOpen, setAttendancesOpen] = useState(false);
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -270,6 +275,25 @@ function Dashboard() {
               },
             ]}
           />
+
+          <SidebarDropdown
+            icon={<HowToRegIcon />}
+            text="Attendances"
+            open={attendancesOpen}
+            toggleOpen={() => setAttendancesOpen(!attendancesOpen)}
+            items={[
+              {
+                icon: <HowToRegIcon />,
+                text: "Add Attendance",
+                link: "/attendances/add",
+              },
+              {
+                icon: <FactCheckIcon />,
+                text: "Manage Attendances",
+                link: "/attendances/manage",
+              },
+            ]}
+          />
         </List>
       </Drawer>
 
@@ -293,6 +317,8 @@ function Dashboard() {
           <Route path="/schedules/manage" element={<ManageSchedules />} />
           <Route path="/students/add" element={<AddStudent />} />
           <Route path="/students/manage" element={<ManageStudents />} />
+          <Route path="/attendances/add" element={<AddAttendance />} />
+          <Route path="/attendances/manage" element={<ManageAttendances />} />
         </Routes>
       </Box>
     </Box>
