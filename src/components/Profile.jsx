@@ -1,13 +1,20 @@
 import { useState } from "react";
 import { Menu, MenuItem, IconButton, Avatar } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import profilePic from "../assets/admin.png";
 
 function ProfileMenu() {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const navigate = useNavigate();
 
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
+
+  const handleLogout = () => {
+    setAnchorEl(null);
+    navigate("/login/admin");
+  };
 
   return (
     <>
@@ -21,7 +28,7 @@ function ProfileMenu() {
       <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
         <MenuItem onClick={handleClose}>Profile</MenuItem>
         <MenuItem onClick={handleClose}>Settings</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>
     </>
   );
