@@ -35,6 +35,8 @@ import {
   CalendarToday as CalendarTodayIcon,
   HowToReg as HowToRegIcon,
   FactCheck as FactCheckIcon,
+  Grade as GradeIcon,
+  AssignmentTurnedIn as AssignmentTurnedInIcon,
 } from "@mui/icons-material";
 import Navbar from "./Navbar";
 import Schedule from "../pages/Schedule";
@@ -57,6 +59,8 @@ import AddSchedule from "../pages/AddSchedule";
 import ManageSchedules from "../pages/ManageSchedules";
 import AddAttendance from "../pages/AddAttendance";
 import ManageAttendances from "../pages/ManageAttendances";
+import AddGrade from "../pages/AddGrade";
+import ManageGrades from "../pages/ManageGrades";
 
 const drawerWidth = 240;
 
@@ -99,6 +103,7 @@ function Dashboard() {
   const [classesOpen, setClassesOpen] = useState(false);
   const [schedulesOpen, setSchedulesOpen] = useState(false);
   const [attendancesOpen, setAttendancesOpen] = useState(false);
+  const [gradesOpen, setGradesOpen] = useState(false);
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -294,6 +299,25 @@ function Dashboard() {
               },
             ]}
           />
+
+          <SidebarDropdown
+            icon={<GradeIcon />}
+            text="Grades"
+            open={gradesOpen}
+            toggleOpen={() => setGradesOpen(!gradesOpen)}
+            items={[
+              {
+                icon: <GradeIcon />,
+                text: "Add Grades",
+                link: "/grades/add",
+              },
+              {
+                icon: <AssignmentTurnedInIcon />,
+                text: "Manage Grades",
+                link: "/grades/manage",
+              },
+            ]}
+          />
         </List>
       </Drawer>
 
@@ -319,6 +343,8 @@ function Dashboard() {
           <Route path="/students/manage" element={<ManageStudents />} />
           <Route path="/attendances/add" element={<AddAttendance />} />
           <Route path="/attendances/manage" element={<ManageAttendances />} />
+          <Route path="/grades/add" element={<AddGrade />} />
+          <Route path="/grades/manage" element={<ManageGrades />} />
         </Routes>
       </Box>
     </Box>
